@@ -15,8 +15,8 @@ export const VRMViewer: React.FC<Props> = ({ src, action }) => {
   useActions(vrm, action);
   usePosition(vrm);
 
-  useFrame((state, delta) => {
-    if (vrm) {
+  useFrame((_state, _delta) => {
+    if (vrm?.update) {
       vrm.update(1 / 60);
     }
   });

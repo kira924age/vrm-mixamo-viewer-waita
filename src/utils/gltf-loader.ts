@@ -1,4 +1,6 @@
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import type { GLTF } from "three/examples/jsm/loaders/GLTFLoader.js";
+
 import { VRMLoaderPlugin, VRMUtils } from "@pixiv/three-vrm";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import { KTX2Loader } from "three/examples/jsm/loaders/KTX2Loader.js";
@@ -10,7 +12,7 @@ import idleAnimation from "../assets/animations/idle.fbx";
 
 import { loadMixamoAnimation } from "./load-mixamo-animation";
 
-export const loadGLTF = (modelUrl: string) => {
+export const loadGLTF = (modelUrl: string): Promise<GLTF> => {
   const dracoLoader = new DRACOLoader();
   const ktx2Loader = new KTX2Loader();
 
@@ -25,7 +27,7 @@ export const loadGLTF = (modelUrl: string) => {
   return new Promise((resolve, reject) => {
     loader.load(
       modelUrl,
-      async (model) => {
+      async (model: GLTF) => {
         if (!model.userData.vrm) {
           resolve(model);
         }

@@ -1,5 +1,5 @@
 // typings.d.ts
-declare module '*.fbx' {
+declare module "*.fbx" {
   const content: string;
   export default content;
 }

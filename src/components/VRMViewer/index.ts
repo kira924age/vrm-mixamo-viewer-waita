@@ -1,1 +1,1 @@
-export { VRMViewer } from './VRMViewer';
+export { VRMViewer } from "./VRMViewer";
