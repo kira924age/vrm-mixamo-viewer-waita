@@ -1,0 +1,31 @@
+.choose-file-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+  background: #212121;
+  border-radius: 24px;
+  width: 200px;
+
+  &:hover {
+    background: #373737;
+  }
+}
+
+.file-input-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 100%;
+}
+
+.button-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 19.2px;
+  font-weight: 500;
+}

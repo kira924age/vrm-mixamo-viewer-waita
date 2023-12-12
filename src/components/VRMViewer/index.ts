@@ -1,0 +1,1 @@
+export { VRMViewer } from './VRMViewer';
