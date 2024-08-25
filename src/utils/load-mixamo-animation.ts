@@ -77,7 +77,10 @@ export const loadMixamoAnimation = (
         if (track instanceof THREE.QuaternionKeyframeTrack) {
           // Retarget rotation of mixamoRig to NormalizedBone.
           for (let i = 0; i < track.values.length; i += 4) {
-            const flatQuaternion = track.values.slice(i, i + 4);
+            const flatQuaternion = track.values.slice(
+              i,
+              i + 4,
+            ) as unknown as THREE.QuaternionTuple;
 
             _quatA.fromArray(flatQuaternion);
 

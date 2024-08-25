@@ -2,7 +2,9 @@
 
 VRM Mixamo Viewer は VRM ファイルをブラウザ上で特定のモーションをつけて描画するサービスです。
 
-## Development Setup
+## Development Guide
+
+- Run development server
 
 ```bash
 $ git clone git@github.com:kira924age/vrm-mixamo-viewer-waita.git
@@ -11,5 +13,9 @@ $ npm ci
 $ npm run dev
 ```
 
-Development server will be running on http://localhost:5173
+- Build for production
+
+```bash
+$ npm run build
+```
 
