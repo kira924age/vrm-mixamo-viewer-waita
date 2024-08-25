@@ -15,6 +15,7 @@ export const useLoadVRM = (src: string) => {
     loadGLTF(src).then((model: GLTF) => {
       const vrm = model?.userData?.vrm;
       if (!vrm) {
+        setVrm(model);
         return;
       }
 

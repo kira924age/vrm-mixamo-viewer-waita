@@ -12,6 +12,7 @@ type Props = {
 
 export const VRMViewer: React.FC<Props> = ({ src, action }) => {
   const { vrm } = useLoadVRM(src);
+
   useActions(vrm, action);
   usePosition(vrm);
 

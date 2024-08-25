@@ -11,6 +11,7 @@ import kickAnimation from "../assets/animations/kick.fbx";
 import idleAnimation from "../assets/animations/idle.fbx";
 
 import { loadMixamoAnimation } from "./load-mixamo-animation";
+import type { AnimationClip } from "three";
 
 export const loadGLTF = (modelUrl: string): Promise<GLTF> => {
   const dracoLoader = new DRACOLoader();
@@ -30,6 +31,7 @@ export const loadGLTF = (modelUrl: string): Promise<GLTF> => {
       async (model: GLTF) => {
         if (!model.userData.vrm) {
           resolve(model);
+          return;
         }
 
         const vrm = model.userData.vrm;
@@ -47,7 +49,7 @@ export const loadGLTF = (modelUrl: string): Promise<GLTF> => {
           console.log(err);
         });
 
-        res?.forEach((clip: THREE.AnimationClip) => {
+        res?.forEach((clip: AnimationClip) => {
           model.animations.push(clip);
         });
 

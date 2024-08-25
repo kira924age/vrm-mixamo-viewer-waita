@@ -12,8 +12,16 @@ type Props = {
 export const VRMCanvas: React.FC<Props> = ({ src, action }) => {
   return (
     <Canvas flat key={src}>
-      <ambientLight />
-      <pointLight position={[10, 10, 10]} />
+      <ambientLight intensity={1} />
+      <spotLight
+        position={[10, 10, 10]}
+        angle={0.15}
+        penumbra={1}
+        decay={0}
+        intensity={1}
+      />
+      <pointLight position={[-10, -10, -10]} decay={0} intensity={1} />
+
       <VRMViewer src={src} action={action} />
       <OrbitControls />
     </Canvas>
