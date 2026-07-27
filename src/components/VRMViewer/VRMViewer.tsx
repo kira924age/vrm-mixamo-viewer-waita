@@ -1,8 +1,7 @@
-import React from "react";
 import { useFrame } from "@react-three/fiber";
-
-import { useLoadVRM } from "./useLoadVRM";
+import type React from "react";
 import { useActions } from "./useActions";
+import { useLoadVRM } from "./useLoadVRM";
 import { usePosition } from "./usePosition";
 
 type Props = {
@@ -16,7 +15,7 @@ export const VRMViewer: React.FC<Props> = ({ src, action }) => {
   useActions(vrm, action);
   usePosition(vrm);
 
-  useFrame((_state, _delta) => {
+  useFrame(() => {
     if (vrm?.update) {
       vrm.update(1 / 60);
     }

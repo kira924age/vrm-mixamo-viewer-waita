@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const useModel = (selectedFile: File | undefined) => {
   const [modelUrl, setModelUrl] = useState<string | undefined>(undefined);

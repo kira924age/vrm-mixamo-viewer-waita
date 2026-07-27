@@ -1,17 +1,14 @@
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
-import type { GLTF } from "three/examples/jsm/loaders/GLTFLoader.js";
-
 import { VRMLoaderPlugin, VRMUtils } from "@pixiv/three-vrm";
+import type { AnimationClip } from "three";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
+import type { GLTF } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { KTX2Loader } from "three/examples/jsm/loaders/KTX2Loader.js";
-
-import walkingAnimation from "../assets/animations/walking.fbx";
+import idleAnimation from "../assets/animations/idle.fbx";
 import jabAnimation from "../assets/animations/jab.fbx";
 import kickAnimation from "../assets/animations/kick.fbx";
-import idleAnimation from "../assets/animations/idle.fbx";
-
+import walkingAnimation from "../assets/animations/walking.fbx";
 import { loadMixamoAnimation } from "./load-mixamo-animation";
-import type { AnimationClip } from "three";
 
 export const loadGLTF = (modelUrl: string): Promise<GLTF> => {
   const dracoLoader = new DRACOLoader();

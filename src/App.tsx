@@ -1,14 +1,13 @@
-import React from "react";
-import { Header } from "./components/Header";
-import { VRMCanvas } from "./components/VRMCanvas";
-import { DragMessageCard } from "./components/DragMessageCard";
-import { ChooseFileButton } from "./components/ChooseFileButton";
-import { NavigationBar } from "./components/NavigationBar";
-
+import type React from "react";
 import styles from "./App.module.scss";
+import { ChooseFileButton } from "./components/ChooseFileButton";
+import { DragMessageCard } from "./components/DragMessageCard";
+import { Header } from "./components/Header";
+import { NavigationBar } from "./components/NavigationBar";
+import { VRMCanvas } from "./components/VRMCanvas";
 import { useChooseFile } from "./hooks/useChooseFile";
-import { useModel } from "./hooks/useModel";
 import { useCurrentAction } from "./hooks/useCurrentAction";
+import { useModel } from "./hooks/useModel";
 
 const App: React.FC = () => {
   const { currentAction, setCurrentAction } = useCurrentAction();
@@ -24,13 +23,14 @@ const App: React.FC = () => {
   const { modelUrl } = useModel(file);
 
   return (
-    <div
+    <section
       className={styles["app-container"]}
       onDrop={handleDrop}
       onDragOver={handleDragOver}
+      aria-label="VRM model drop area"
     >
       <Header />
-      <div className={styles["main"]}>
+      <div className={styles.main}>
         {modelUrl === undefined && (
           <>
             <DragMessageCard />
@@ -46,7 +46,7 @@ const App: React.FC = () => {
           </>
         )}
       </div>
-    </div>
+    </section>
   );
 };
 

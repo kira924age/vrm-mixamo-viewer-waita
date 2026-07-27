@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { loadGLTF } from "../../utils/gltf-loader";
+import type { AnimationClip, Object3D, Scene } from "three";
 import type { GLTF } from "three/examples/jsm/loaders/GLTFLoader.js";
-import type { Scene, AnimationClip, Object3D } from "three";
+import { loadGLTF } from "../../utils/gltf-loader";
 
 export type VRM = {
   scene: Scene;

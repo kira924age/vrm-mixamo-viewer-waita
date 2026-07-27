@@ -3,39 +3,32 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "packageManager": "pnpm@11.17.0",
   "scripts": {
     "dev": "vite",
     "lint:tsc": "tsc --noEmit",
-    "lint-fix:prettier": "prettier --write .",
+    "lint:fix": "biome check --write .",
+    "format": "biome format --write .",
     "build": "tsc && vite build",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint": "biome check .",
     "preview": "vite preview"
   },
   "dependencies": {
-    "@pixiv/three-vrm": "^3.1.0",
-    "@react-three/drei": "^9.92.1",
-    "@react-three/fiber": "^8.15.12",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "sass": "^1.69.5",
-    "three": "^0.167.0"
+    "@pixiv/three-vrm": "^3.5.5",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.6.1",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "sass": "^1.102.0",
+    "three": "^0.185.1"
   },
   "devDependencies": {
-    "@types/react": "^18.2.37",
-    "@types/react-dom": "^18.2.15",
-    "@types/three": "^0.167.2",
-    "@typescript-eslint/eslint-plugin": "^6.10.0",
-    "@typescript-eslint/parser": "^6.10.0",
-    "@vitejs/plugin-react": "^4.2.0",
-    "eslint": "^8.53.0",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "eslint-plugin-react-refresh": "^0.4.4",
-    "prettier": "3.1.1",
-    "typescript": "^5.2.2",
-    "vite": "^5.0.0"
-  },
-  "volta": {
-    "node": "18.19.0",
-    "npm": "10.2.5"
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@types/three": "^0.185.1",
+    "@biomejs/biome": "^2.5.5",
+    "@vitejs/plugin-react": "^6.0.4",
+    "typescript": "^7.0.2",
+    "vite": "^8.1.5"
   }
 }

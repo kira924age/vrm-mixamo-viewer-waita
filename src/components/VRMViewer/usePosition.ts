@@ -1,5 +1,5 @@
-import { useEffect } from "react";
 import { useThree } from "@react-three/fiber";
+import { useEffect } from "react";
 
 import * as THREE from "three";
 
@@ -29,7 +29,5 @@ export const usePosition = (vrm: VRM | undefined) => {
     camera.position.z = center.z + size / 2.0;
 
     camera.updateProjectionMatrix();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [vrm]);
+  }, [camera, vrm]);
 };

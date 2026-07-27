@@ -1,7 +1,6 @@
-import React from "react";
-import { FileInputIcon } from "./icons/FileInputIcon";
-
+import type React from "react";
 import styles from "./ChooseFileButton.module.scss";
+import { FileInputIcon } from "./icons/FileInputIcon";
 
 type Props = {
   onClick: () => void;

@@ -1,6 +1,6 @@
+import type { VRM } from "@pixiv/three-vrm";
 import * as THREE from "three";
 import { FBXLoader } from "three/examples/jsm/loaders/FBXLoader.js";
-import type { VRM } from "@pixiv/three-vrm";
 
 import type { MixamoRigName } from "./mixamo-vrm-rig-mappings";
 import { mixamoVRMRigMap } from "./mixamo-vrm-rig-mappings";
@@ -22,6 +22,9 @@ export const loadMixamoAnimation = (
 
   return loader.loadAsync(url).then((asset: THREE.Group) => {
     const clip = THREE.AnimationClip.findByName(asset.animations, "mixamo.com");
+    if (clip === null) {
+      throw new Error("Failed to find the Mixamo animation clip.");
+    }
 
     const tracks: THREE.KeyframeTrack[] = [];
 

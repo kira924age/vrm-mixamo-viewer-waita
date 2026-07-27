@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import styles from "./NavigationBar.module.scss";
 
 type Props = {
@@ -9,6 +9,7 @@ export const NavigationBar: React.FC<Props> = ({ setCurrentAction }) => {
   return (
     <div className={styles["navigation-bar-container"]}>
       <button
+        type="button"
         onClick={() => {
           setCurrentAction("walking");
         }}
@@ -16,6 +17,7 @@ export const NavigationBar: React.FC<Props> = ({ setCurrentAction }) => {
         Walking
       </button>
       <button
+        type="button"
         onClick={() => {
           setCurrentAction("kick");
         }}
@@ -23,6 +25,7 @@ export const NavigationBar: React.FC<Props> = ({ setCurrentAction }) => {
         Kick
       </button>
       <button
+        type="button"
         onClick={() => {
           setCurrentAction("jab");
         }}
@@ -30,6 +33,7 @@ export const NavigationBar: React.FC<Props> = ({ setCurrentAction }) => {
         Punch
       </button>
       <button
+        type="button"
         onClick={() => {
           setCurrentAction("idle");
         }}
@@ -37,6 +41,7 @@ export const NavigationBar: React.FC<Props> = ({ setCurrentAction }) => {
         Idle
       </button>
       <button
+        type="button"
         onClick={() => {
           setCurrentAction("stop");
         }}
