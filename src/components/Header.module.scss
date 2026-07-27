@@ -1,12 +1,40 @@
 .header-container {
   height: 64px;
   background: #353535;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  box-sizing: border-box;
 }
 
 .site-brand-container {
   font-size: 1.4rem;
-  margin-left: 32px;
   height: 100%;
   display: flex;
   align-items: center;
+}
+
+.github-link {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.87);
+  border-radius: 50%;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+
+  &:hover {
+    color: #ffffff;
+    transform: scale(1.08);
+  }
+
+  &:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 4px;
+  }
 }
