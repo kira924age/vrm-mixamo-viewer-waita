@@ -2,6 +2,12 @@
 
 VRM Mixamo Viewer は VRM ファイルをブラウザ上で特定のモーションをつけて描画するサービスです。
 
+glTF/VRM 内の次の圧縮形式に対応しています。
+
+- Draco (`KHR_draco_mesh_compression`)
+- Meshopt (`EXT_meshopt_compression`)
+- KTX2 / Basis Universal (`KHR_texture_basisu`)
+
 ## 必要な環境
 
 - Node.js 26.5.0

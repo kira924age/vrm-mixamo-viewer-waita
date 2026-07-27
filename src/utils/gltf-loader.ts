@@ -1,5 +1,6 @@
 import { VRMLoaderPlugin, VRMUtils } from "@pixiv/three-vrm";
-import type { AnimationClip } from "three";
+import type { AnimationClip, WebGLRenderer } from "three";
+import { MeshoptDecoder } from "three/examples/jsm/libs/meshopt_decoder.module.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
 import type { GLTF } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
@@ -10,9 +11,12 @@ import kickAnimation from "../assets/animations/kick.fbx";
 import walkingAnimation from "../assets/animations/walking.fbx";
 import { loadMixamoAnimation } from "./load-mixamo-animation";
 
-export const loadGLTF = (modelUrl: string): Promise<GLTF> => {
+export const loadGLTF = async (
+  modelUrl: string,
+  renderer: WebGLRenderer,
+): Promise<GLTF> => {
   const dracoLoader = new DRACOLoader();
-  const ktx2Loader = new KTX2Loader();
+  const ktx2Loader = new KTX2Loader().detectSupport(renderer);
 
   const loader = new GLTFLoader();
   loader.register((parser) => {
@@ -21,44 +25,44 @@ export const loadGLTF = (modelUrl: string): Promise<GLTF> => {
 
   loader.setDRACOLoader(dracoLoader);
   loader.setKTX2Loader(ktx2Loader);
+  loader.setMeshoptDecoder(MeshoptDecoder);
 
-  return new Promise((resolve, reject) => {
-    loader.load(
-      modelUrl,
-      async (model: GLTF) => {
-        if (!model.userData.vrm) {
-          resolve(model);
-          return;
-        }
-
-        const vrm = model.userData.vrm;
-
-        VRMUtils.rotateVRM0(vrm);
-        VRMUtils.removeUnnecessaryVertices(vrm.scene);
-        VRMUtils.removeUnnecessaryJoints(vrm.scene);
-
-        const res = await Promise.all([
-          loadMixamoAnimation(walkingAnimation, "walking", vrm),
-          loadMixamoAnimation(jabAnimation, "jab", vrm),
-          loadMixamoAnimation(kickAnimation, "kick", vrm),
-          loadMixamoAnimation(idleAnimation, "idle", vrm),
-        ]).catch((err) => {
-          console.log(err);
-        });
-
-        res?.forEach((clip: AnimationClip) => {
-          model.animations.push(clip);
-        });
-
-        resolve(model);
-      },
-      (progress) =>
-        console.log(
-          "Loading model...",
-          100.0 * (progress.loaded / progress.total),
-          "%",
-        ),
-      reject,
+  try {
+    const model = await loader.loadAsync(modelUrl, (progress) =>
+      console.log(
+        "Loading model...",
+        100.0 * (progress.loaded / progress.total),
+        "%",
+      ),
     );
-  });
+
+    if (!model.userData.vrm) {
+      return model;
+    }
+
+    const vrm = model.userData.vrm;
+
+    VRMUtils.rotateVRM0(vrm);
+    VRMUtils.removeUnnecessaryVertices(vrm.scene);
+    VRMUtils.combineSkeletons(vrm.scene);
+
+    const animations = await Promise.all([
+      loadMixamoAnimation(walkingAnimation, "walking", vrm),
+      loadMixamoAnimation(jabAnimation, "jab", vrm),
+      loadMixamoAnimation(kickAnimation, "kick", vrm),
+      loadMixamoAnimation(idleAnimation, "idle", vrm),
+    ]).catch((error) => {
+      console.error(error);
+      return [];
+    });
+
+    animations.forEach((clip: AnimationClip) => {
+      model.animations.push(clip);
+    });
+
+    return model;
+  } finally {
+    dracoLoader.dispose();
+    ktx2Loader.dispose();
+  }
 };
